@@ -111,23 +111,28 @@ public class regxParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof regxListener ) ((regxListener)listener).exitPrimaryExp(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof regxVisitor ) return ((regxVisitor<? extends T>)visitor).visitPrimaryExp(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final PrimaryExpContext primaryExp() throws RecognitionException {
 		PrimaryExpContext _localctx = new PrimaryExpContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_primaryExp);
 		try {
-			setState(16);
+			setState(15);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case Identifier:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(10);
 				match(Identifier);
 				}
 				break;
-			case 2:
+			case LeftParen:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(11);
@@ -138,11 +143,8 @@ public class regxParser extends Parser {
 				match(RightParen);
 				}
 				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				}
-				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -176,6 +178,11 @@ public class regxParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof regxListener ) ((regxListener)listener).exitClosureExp(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof regxVisitor ) return ((regxVisitor<? extends T>)visitor).visitClosureExp(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ClosureExpContext closureExp() throws RecognitionException {
@@ -194,11 +201,11 @@ public class regxParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(19);
+			setState(18);
 			primaryExp();
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(25);
+			setState(24);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -209,14 +216,14 @@ public class regxParser extends Parser {
 					{
 					_localctx = new ClosureExpContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_closureExp);
-					setState(21);
+					setState(20);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(22);
+					setState(21);
 					match(Closure);
 					}
 					} 
 				}
-				setState(27);
+				setState(26);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			}
@@ -253,6 +260,11 @@ public class regxParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof regxListener ) ((regxListener)listener).exitConcatExp(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof regxVisitor ) return ((regxVisitor<? extends T>)visitor).visitConcatExp(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ConcatExpContext concatExp() throws RecognitionException {
@@ -271,11 +283,11 @@ public class regxParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(29);
+			setState(28);
 			closureExp(0);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(36);
+			setState(35);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -286,16 +298,16 @@ public class regxParser extends Parser {
 					{
 					_localctx = new ConcatExpContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_concatExp);
-					setState(31);
+					setState(30);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(32);
+					setState(31);
 					match(Concat);
-					setState(33);
+					setState(32);
 					closureExp(0);
 					}
 					} 
 				}
-				setState(38);
+				setState(37);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
@@ -332,6 +344,11 @@ public class regxParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof regxListener ) ((regxListener)listener).exitOrExp(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof regxVisitor ) return ((regxVisitor<? extends T>)visitor).visitOrExp(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final OrExpContext orExp() throws RecognitionException {
@@ -350,11 +367,11 @@ public class regxParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(40);
+			setState(39);
 			concatExp(0);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(47);
+			setState(46);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -365,16 +382,16 @@ public class regxParser extends Parser {
 					{
 					_localctx = new OrExpContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_orExp);
-					setState(42);
+					setState(41);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(43);
+					setState(42);
 					match(Or);
-					setState(44);
+					setState(43);
 					concatExp(0);
 					}
 					} 
 				}
-				setState(49);
+				setState(48);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			}
@@ -407,6 +424,11 @@ public class regxParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof regxListener ) ((regxListener)listener).exitExpression(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof regxVisitor ) return ((regxVisitor<? extends T>)visitor).visitExpression(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ExpressionContext expression() throws RecognitionException {
@@ -415,7 +437,7 @@ public class regxParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
+			setState(49);
 			orExp(0);
 			}
 		}
@@ -464,21 +486,20 @@ public class regxParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\n\67\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\2\3\2\3\2\5\2\23\n\2\3\3\3"+
-		"\3\3\3\3\3\3\3\7\3\32\n\3\f\3\16\3\35\13\3\3\4\3\4\3\4\3\4\3\4\3\4\7\4"+
-		"%\n\4\f\4\16\4(\13\4\3\5\3\5\3\5\3\5\3\5\3\5\7\5\60\n\5\f\5\16\5\63\13"+
-		"\5\3\6\3\6\3\6\2\5\4\6\b\7\2\4\6\b\n\2\2\2\66\2\22\3\2\2\2\4\24\3\2\2"+
-		"\2\6\36\3\2\2\2\b)\3\2\2\2\n\64\3\2\2\2\f\23\7\b\2\2\r\16\7\5\2\2\16\17"+
-		"\5\n\6\2\17\20\7\6\2\2\20\23\3\2\2\2\21\23\3\2\2\2\22\f\3\2\2\2\22\r\3"+
-		"\2\2\2\22\21\3\2\2\2\23\3\3\2\2\2\24\25\b\3\1\2\25\26\5\2\2\2\26\33\3"+
-		"\2\2\2\27\30\f\3\2\2\30\32\7\4\2\2\31\27\3\2\2\2\32\35\3\2\2\2\33\31\3"+
-		"\2\2\2\33\34\3\2\2\2\34\5\3\2\2\2\35\33\3\2\2\2\36\37\b\4\1\2\37 \5\4"+
-		"\3\2 &\3\2\2\2!\"\f\3\2\2\"#\7\7\2\2#%\5\4\3\2$!\3\2\2\2%(\3\2\2\2&$\3"+
-		"\2\2\2&\'\3\2\2\2\'\7\3\2\2\2(&\3\2\2\2)*\b\5\1\2*+\5\6\4\2+\61\3\2\2"+
-		"\2,-\f\3\2\2-.\7\3\2\2.\60\5\6\4\2/,\3\2\2\2\60\63\3\2\2\2\61/\3\2\2\2"+
-		"\61\62\3\2\2\2\62\t\3\2\2\2\63\61\3\2\2\2\64\65\5\b\5\2\65\13\3\2\2\2"+
-		"\6\22\33&\61";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\n\66\4\2\t\2\4\3"+
+		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\2\3\2\5\2\22\n\2\3\3\3\3\3"+
+		"\3\3\3\3\3\7\3\31\n\3\f\3\16\3\34\13\3\3\4\3\4\3\4\3\4\3\4\3\4\7\4$\n"+
+		"\4\f\4\16\4\'\13\4\3\5\3\5\3\5\3\5\3\5\3\5\7\5/\n\5\f\5\16\5\62\13\5\3"+
+		"\6\3\6\3\6\2\5\4\6\b\7\2\4\6\b\n\2\2\2\64\2\21\3\2\2\2\4\23\3\2\2\2\6"+
+		"\35\3\2\2\2\b(\3\2\2\2\n\63\3\2\2\2\f\22\7\b\2\2\r\16\7\5\2\2\16\17\5"+
+		"\n\6\2\17\20\7\6\2\2\20\22\3\2\2\2\21\f\3\2\2\2\21\r\3\2\2\2\22\3\3\2"+
+		"\2\2\23\24\b\3\1\2\24\25\5\2\2\2\25\32\3\2\2\2\26\27\f\3\2\2\27\31\7\4"+
+		"\2\2\30\26\3\2\2\2\31\34\3\2\2\2\32\30\3\2\2\2\32\33\3\2\2\2\33\5\3\2"+
+		"\2\2\34\32\3\2\2\2\35\36\b\4\1\2\36\37\5\4\3\2\37%\3\2\2\2 !\f\3\2\2!"+
+		"\"\7\7\2\2\"$\5\4\3\2# \3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&\7\3\2"+
+		"\2\2\'%\3\2\2\2()\b\5\1\2)*\5\6\4\2*\60\3\2\2\2+,\f\3\2\2,-\7\3\2\2-/"+
+		"\5\6\4\2.+\3\2\2\2/\62\3\2\2\2\60.\3\2\2\2\60\61\3\2\2\2\61\t\3\2\2\2"+
+		"\62\60\3\2\2\2\63\64\5\b\5\2\64\13\3\2\2\2\6\21\32%\60";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

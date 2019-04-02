@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class Main {
+
     public static void main(String[] args) throws Exception{
         String inputFile = null;
         if ( args.length>0 ) inputFile = args[0];
@@ -22,7 +23,11 @@ public class Main {
         ParseTree tree = parser.expression();
 
         ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk(new Regx2NFA(), tree);
-        System.out.println("done");
+        Regx2NFA translator = new Regx2NFA();
+        walker.walk(translator, tree);
+
+        System.out.println("");
+        System.out.println(translator.graph.toDOT());
     }
+
 }

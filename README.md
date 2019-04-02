@@ -1,6 +1,9 @@
 # Visualization of Regx2DFA
 
-Java program to visualize the 
+Java program to convert regular expression to DFA with visualization.
+
+## Dependency
+- antlr-4.7.2
 
 ## Usage
 
@@ -8,13 +11,8 @@ Java program to visualize the
 
 ## Todo
 
+- [ ] regx to nfa
 - [ ] nfa to dfa
 - [ ] visualize 
-- [ ] regular expression to nfa
-- [ ] interactive input
+- [ ] minimize dfa
 
-
-
-## Library
-
-https://gojs.net/latest/samples/stateChart.html

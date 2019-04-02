@@ -1,8 +1,7 @@
 grammar regx;
 
-primaryExp: 
-    Identifier |
-    LeftParen expression RightParen |
+primaryExp: Identifier                         
+    |       LeftParen expression RightParen   
     ;
 
 closureExp:

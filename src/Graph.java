@@ -16,6 +16,7 @@ public class Graph {
     public String toString() {
         return "edges: "+edges.toString()+", functions: "+ nodes;
     }
+
     public String toDOT() {
         StringBuilder buf = new StringBuilder();
         buf.append("digraph G {\n");
