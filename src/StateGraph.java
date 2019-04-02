@@ -3,7 +3,7 @@ import java.util.Vector;
 
 public class StateGraph {
 
-    static String epsilon = "ε";
+    static String epsilon = "e";
 
     class Edge {
         int from, to;
@@ -66,6 +66,7 @@ public class StateGraph {
         buf.append("  edge [arrowsize=.5]\n");
         buf.append("  node [shape=circle, fontname=\"ArialNarrow\",\n");
         buf.append("        fontsize=12, fixedsize=true, height=.45];\n");
+        buf.append("  orientation=landscape;\n");
         buf.append("  ");
         for(int i=1; i<=num_of_state; ++i) { // print all nodes first
             buf.append(i);
@@ -77,6 +78,9 @@ public class StateGraph {
                 buf.append(edge.from);
                 buf.append(" -> ");
                 buf.append(edge.to);
+                buf.append(" [ label=\"");
+                buf.append(edge.label);
+                buf.append(" \"] ");
                 buf.append(";\n");
         }
 
