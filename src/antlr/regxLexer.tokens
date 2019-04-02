@@ -1,0 +1,13 @@
+Or=1
+Closure=2
+LeftParen=3
+RightParen=4
+Concat=5
+Identifier=6
+Whitespace=7
+Newline=8
+'|'=1
+'*'=2
+'('=3
+')'=4
+'&'=5
