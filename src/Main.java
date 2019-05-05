@@ -4,7 +4,9 @@ import org.antlr.v4.runtime.tree.*;
 import antlr.*;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.PrintWriter;
 
 public class Main {
 
@@ -15,6 +17,7 @@ public class Main {
         if ( inputFile!=null ) {
             is = new FileInputStream(inputFile);
         }
+
         ANTLRInputStream input = new ANTLRInputStream(is);
         regxLexer lexer = new regxLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -28,6 +31,10 @@ public class Main {
 
         System.out.println("");
         System.out.println(translator.graph.toDOT());
+
+        PrintWriter out = new PrintWriter(inputFile + ".dot");
+        out.println(translator.graph.toDOT());
+        out.close();
     }
 
 }
