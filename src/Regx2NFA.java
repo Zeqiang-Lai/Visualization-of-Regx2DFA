@@ -1,11 +1,7 @@
-import javafx.stage.Stage;
-import org.antlr.v4.runtime.Token;
+import antlr.regxBaseListener;
+import antlr.regxParser;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
-import antlr.*;
-
-import java.util.List;
 import java.util.Vector;
 
 public class Regx2NFA extends regxBaseListener{
@@ -49,7 +45,7 @@ public class Regx2NFA extends regxBaseListener{
         ctx_states.add(end);
 
         states_memory.put(ctx, ctx_states);
-        System.out.println("ClosureExp:"+ctx_states.toString());
+//        System.out.println("ClosureExp:"+ctx_states.toString());
     }
 
     @Override
@@ -77,7 +73,7 @@ public class Regx2NFA extends regxBaseListener{
         ctx_states.addAll(right_states);
 
         states_memory.put(ctx, ctx_states);
-        System.out.println("ConcatExp:"+ctx_states.toString());
+//        System.out.println("ConcatExp:"+ctx_states.toString());
     }
 
     @Override
@@ -116,7 +112,7 @@ public class Regx2NFA extends regxBaseListener{
         ctx_states.add(end);
 
         states_memory.put(ctx, ctx_states);
-        System.out.println("OrExp:"+ctx_states.toString());
+//        System.out.println("OrExp:"+ctx_states.toString());
     }
 
     @Override
@@ -125,7 +121,7 @@ public class Regx2NFA extends regxBaseListener{
         // Just copy the states of it child 'orExp'
         Vector<Integer> ctx_states = states_memory.get(ctx.orExp());
         states_memory.put(ctx, ctx_states);
-        System.out.println("Exp:"+ctx_states.toString());
+//        System.out.println("Exp:"+ctx_states.toString());
     }
 
     @Override
@@ -135,7 +131,7 @@ public class Regx2NFA extends regxBaseListener{
         if(ctx.expression() != null) {
             Vector<Integer> ctx_states = states_memory.get(ctx.expression());
             states_memory.put(ctx, ctx_states);
-            System.out.println("Paren:"+ctx_states.toString());
+//            System.out.println("Paren:"+ctx_states.toString());
             return;
         }
 
@@ -154,7 +150,7 @@ public class Regx2NFA extends regxBaseListener{
 
         // store in memory.
         states_memory.put(ctx, ctx_states);
-        System.out.println("id:"+ctx_states.toString());
+//        System.out.println("id:"+ctx_states.toString());
     }
 
 }
