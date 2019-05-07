@@ -1,16 +1,18 @@
+package regx;
+
 import antlr.regxBaseListener;
 import antlr.regxParser;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
 import java.util.Vector;
 
-public class Regx2NFA extends regxBaseListener{
+public class RegxGraphTranslator extends regxBaseListener{
 
     private ParseTreeProperty<Vector<Integer>> states_memory = new ParseTreeProperty<>();
 
-    StateGraph graph = new StateGraph();
+    private RegxStateGraph graph = new RegxStateGraph();
 
-    public StateGraph getGraph() {
+    public RegxStateGraph getGraph() {
         return graph;
     }
 
@@ -34,9 +36,10 @@ public class Regx2NFA extends regxBaseListener{
         //              ┌   ε   ┐
         // start - u_st ┴ ..... ┴ u_end - end
         //
-        graph.addEdge(start, u_states.firstElement(), StateGraph.epsilon);
-        graph.addEdge(u_states.lastElement(), end, StateGraph.epsilon);
-        graph.addEdge(u_states.lastElement(), u_states.firstElement(), StateGraph.epsilon);
+        graph.addEdge(start, u_states.firstElement(), RegxStateGraph.epsilon);
+        graph.addEdge(u_states.lastElement(), end, RegxStateGraph.epsilon);
+        graph.addEdge(u_states.lastElement(), u_states.firstElement(), RegxStateGraph.epsilon);
+        graph.addEdge(start, end, RegxStateGraph.epsilon);
 
         // merge states
         Vector<Integer> ctx_states = new Vector<>();
@@ -65,7 +68,7 @@ public class Regx2NFA extends regxBaseListener{
         // add edges(connect left_states to right_states, using unconditional jump)
         // left_end -> right_start
         //
-        graph.addEdge(left_states.lastElement(), right_states.firstElement(), StateGraph.epsilon);
+        graph.addEdge(left_states.lastElement(), right_states.firstElement(), RegxStateGraph.epsilon);
 
         // merge states
         Vector<Integer> ctx_states = new Vector<>();
@@ -99,10 +102,10 @@ public class Regx2NFA extends regxBaseListener{
         // start ┤             ├ end
         //       └ 3 - ... - 4 ┘
         //
-        graph.addEdge(start, left_states.firstElement(), StateGraph.epsilon);
-        graph.addEdge(start, right_states.firstElement(), StateGraph.epsilon);
-        graph.addEdge(left_states.lastElement(), end, StateGraph.epsilon);
-        graph.addEdge(right_states.lastElement(), end, StateGraph.epsilon);
+        graph.addEdge(start, left_states.firstElement(), RegxStateGraph.epsilon);
+        graph.addEdge(start, right_states.firstElement(), RegxStateGraph.epsilon);
+        graph.addEdge(left_states.lastElement(), end, RegxStateGraph.epsilon);
+        graph.addEdge(right_states.lastElement(), end, RegxStateGraph.epsilon);
 
         // merge states.
         Vector<Integer> ctx_states = new Vector<>();

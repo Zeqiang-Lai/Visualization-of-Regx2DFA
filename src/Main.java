@@ -1,10 +1,13 @@
+import automata.DFA;
+import automata.NFA;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 import antlr.*;
+import regx.RegxGraphTranslator;
+import regx.RegxStateGraph;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
 
@@ -26,14 +29,20 @@ public class Main {
         ParseTree tree = parser.expression();
 
         ParseTreeWalker walker = new ParseTreeWalker();
-        Regx2NFA translator = new Regx2NFA();
+        RegxGraphTranslator translator = new RegxGraphTranslator();
         walker.walk(translator, tree);
 
-        System.out.println("");
-        System.out.println(translator.graph.toDOT());
+//        System.out.println("");
+//        System.out.println(translator.getGraph().toDOT());
+//        RegxStateGraph graph = translator.getGraph();
+
+        NFA nfa = translator.getGraph().toNFA();
+        DFA dfa = DFA.from(nfa);
+        RegxStateGraph graph = RegxStateGraph.from(dfa);
 
         PrintWriter out = new PrintWriter(inputFile + ".dot");
-        out.println(translator.graph.toDOT());
+        out.println(graph.toDOT());
+//        out.println(translator.getGraph().toDOT());
         out.close();
     }
 
