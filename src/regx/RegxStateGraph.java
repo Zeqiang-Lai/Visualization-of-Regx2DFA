@@ -221,15 +221,13 @@ public class RegxStateGraph {
 
     static public RegxStateGraph from(DFA dfa) {
         RegxStateGraph graph = new RegxStateGraph();
-        Integer from;
+        Integer from, to;
         String label;
         for (Pair<Integer, String> key : dfa.transitions.keySet()) {
             from = key.getKey();
             label = key.getValue();
-            Set<Integer> tos = dfa.transitions.get(key);
-            for (Integer to : tos) {
-                graph.addEdge(from, to, label);
-            }
+            to = dfa.transitions.get(key);
+            graph.addEdge(from, to, label);
         }
         graph.num_of_state = dfa.states.size();
         graph.destinations.addAll(dfa.final_states);

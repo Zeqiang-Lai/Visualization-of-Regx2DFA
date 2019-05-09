@@ -38,12 +38,15 @@ public class Main {
 
         NFA nfa = translator.getGraph().toNFA();
         DFA dfa = DFA.from(nfa);
+        dfa = dfa.minimize();
         RegxStateGraph graph = RegxStateGraph.from(dfa);
 
         PrintWriter out = new PrintWriter(inputFile + ".dot");
         out.println(graph.toDOT());
 //        out.println(translator.getGraph().toDOT());
         out.close();
+
+        System.out.println("Successfully generated: " + inputFile + ".dot");
     }
 
 }
